@@ -1,0 +1,60 @@
+/* src/pages/TrainPage.module.css */
+
+.main {
+  flex-grow: 1;
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 3rem var(--page-px);
+}
+
+@media (min-width: 768px) {
+  .main {
+    padding: 5rem var(--page-px);
+  }
+}
+
+/* Hero */
+.hero {
+  margin-bottom: 4rem;
+}
+
+.heroHeading {
+  font-family: var(--font-headline);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--color-on-surface);
+  margin-bottom: 1rem;
+  line-height: 1.15;
+}
+
+.heroAccent {
+  color: var(--color-primary);
+}
+
+.heroSub {
+  color: var(--color-on-surface-variant);
+  font-size: 1.1rem;
+  max-width: 36rem;
+  line-height: 1.6;
+}
+
+/* Grid */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 480px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

@@ -1,0 +1,76 @@
+/* src/components/TopAppBar.module.css */
+
+.header {
+  background-color: #f8fafc;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 1rem var(--page-px);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-headline);
+  font-size: clamp(0.95rem, 2vw, 1.2rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #0f172a;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: opacity 0.2s;
+}
+
+.brand:hover { opacity: 0.75; }
+
+.brandIcon {
+  color: var(--color-primary);
+  font-size: 1.4rem;
+}
+
+.nav {
+  display: none;
+  align-items: center;
+  gap: 2rem;
+}
+
+@media (min-width: 640px) {
+  .nav { display: flex; }
+}
+
+.navBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 500;
+  font-family: var(--font-body);
+  color: #64748b;
+  padding-bottom: 2px;
+  transition: color 0.2s;
+}
+
+.navBtn:hover { color: #3b82f6; }
+
+.navBtnActive {
+  color: #2563eb;
+  border-bottom: 2px solid #2563eb;
+}
+
+.divider {
+  height: 1px;
+  width: 100%;
+  background-color: rgba(148, 163, 184, 0.3);
+}

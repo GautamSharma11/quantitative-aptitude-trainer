@@ -1,0 +1,348 @@
+/* src/pages/ConfigureSessionPage.module.css */
+
+.main {
+  flex-grow: 1;
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: clamp(1.5rem, 4vw, 3rem) var(--page-px);
+}
+
+/* Two-column on wide screens */
+.layout {
+  display: flex;
+  gap: 2.5rem;
+  align-items: flex-start;
+}
+
+.formSide {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ── Hero ── */
+.hero {
+  margin-bottom: 1.5rem;
+}
+
+.heading {
+  font-family: var(--font-headline);
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--color-on-surface);
+  margin-bottom: 0.5rem;
+}
+
+.sub {
+  color: var(--color-on-surface-variant);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  max-width: 36rem;
+}
+
+/* ── Card ── */
+.card {
+  background: var(--color-surface-lowest);
+  border-radius: 0.75rem;
+  box-shadow: 0 12px 32px -4px rgba(44, 52, 55, 0.06);
+  padding: clamp(1.25rem, 4vw, 2rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+/* ── Sections ── */
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.sectionLabel {
+  font-family: var(--font-headline);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-on-surface-variant);
+}
+
+/* ── Count buttons ── */
+.countGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.6rem;
+}
+
+.countBtn {
+  padding: 0.65rem 0;
+  border-radius: 0.5rem;
+  border: 2px solid transparent;
+  background: var(--color-surface-container-high);
+  color: var(--color-on-surface-variant);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.countBtn:hover {
+  background: var(--color-surface-container-highest);
+}
+
+.countBtnActive {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  background: rgba(0, 83, 220, 0.04);
+  font-weight: 700;
+}
+
+/* ── Digit buttons ── */
+.digitGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.6rem;
+}
+
+.digitBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 0.5rem;
+  border-radius: 0.75rem;
+  border: none;
+  background: var(--color-surface-container-high);
+  color: var(--color-on-surface);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  gap: 0.2rem;
+}
+
+.digitBtn:hover {
+  background: var(--color-surface-container-highest);
+}
+
+.digitBtnActive {
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+.digitNum {
+  font-family: var(--font-headline);
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.digitLabel {
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.75;
+}
+
+/* ── Mode radio rows ── */
+.modeList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.modeRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.9rem 1rem;
+  border-radius: 0.75rem;
+  background: var(--color-surface-container-low);
+  cursor: pointer;
+  transition: background 0.15s;
+  border: 2px solid transparent;
+}
+
+.modeRow:hover {
+  background: var(--color-surface-container);
+}
+
+.modeRowActive {
+  border-color: rgba(0, 83, 220, 0.25);
+  background: rgba(0, 83, 220, 0.03);
+}
+
+.radio {
+  margin-top: 3px;
+  width: 1.1rem;
+  height: 1.1rem;
+  accent-color: var(--color-primary);
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.modeText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.modeTitleRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.modeTitle {
+  font-family: var(--font-headline);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-on-surface);
+}
+
+.badge {
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  background: #e6cafa;
+  color: #564067;
+}
+
+.modeDesc {
+  font-size: 0.85rem;
+  color: var(--color-on-surface-variant);
+  line-height: 1.5;
+}
+
+/* ── CTA ── */
+.ctaWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding-top: 0.5rem;
+}
+
+.cta {
+  width: 100%;
+  background: linear-gradient(135deg, #0053dc 0%, #3e76fe 100%);
+  color: #faf8ff;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 9999px;
+  font-family: var(--font-headline);
+  font-size: 1.05rem;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  box-shadow: 0 8px 24px rgba(0, 83, 220, 0.25);
+  transition: transform 0.15s, opacity 0.15s;
+}
+
+.cta:hover:not(:disabled) { transform: scale(1.02); }
+.cta:active:not(:disabled){ transform: scale(0.98); }
+.cta:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.ctaIcon { font-size: 1.4rem; }
+
+.estimate {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--color-outline-variant);
+}
+
+.error {
+  font-size: 0.85rem;
+  color: #a83836;
+  background: rgba(168, 56, 54, 0.08);
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  text-align: center;
+}
+
+/* ── Summary Panel (right col) ── */
+.summaryPanel {
+  display: none;
+  width: 220px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 6rem;
+}
+
+@media (min-width: 768px) {
+  .summaryPanel { display: block; }
+}
+
+.summaryCard {
+  background: var(--color-surface-lowest);
+  border-radius: 0.75rem;
+  box-shadow: 0 12px 32px -4px rgba(44, 52, 55, 0.06);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.summaryTrainer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-headline);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-on-surface);
+}
+
+.summaryIcon {
+  color: var(--color-primary);
+  font-size: 1.4rem;
+}
+
+.summaryList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.summaryItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+}
+
+.summaryKey {
+  color: var(--color-on-surface-variant);
+}
+
+.summaryVal {
+  font-weight: 600;
+  color: var(--color-on-surface);
+}
+
+.summaryPreview {
+  background: rgba(0, 83, 220, 0.05);
+  border: 1px solid rgba(0, 83, 220, 0.15);
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  text-align: center;
+  font-family: var(--font-headline);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.summaryPreview em {
+  font-style: normal;
+  opacity: 0.5;
+}

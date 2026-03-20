@@ -1,0 +1,171 @@
+/* src/pages/ResultsPage.module.css */
+
+.main {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1.5rem, 4vw, 3rem) var(--page-px);
+}
+
+.card {
+  width: 100%;
+  max-width: 480px;
+  background: var(--color-surface-lowest);
+  border-radius: 1rem;
+  box-shadow: 0 16px 48px -8px rgba(44, 52, 55, 0.1);
+  padding: clamp(1.5rem, 5vw, 2.5rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* Grade */
+.gradeBadge {
+  font-family: var(--font-headline);
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  padding: 0.35rem 1rem;
+  border-radius: 9999px;
+  border: 2px solid;
+}
+
+/* Accuracy ring */
+.accuracyWrap {
+  position: relative;
+  width: clamp(100px, 25vw, 140px);
+  height: clamp(100px, 25vw, 140px);
+}
+
+.ring {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.ringBg {
+  fill: none;
+  stroke: var(--color-surface-container-high);
+  stroke-width: 10;
+}
+
+.ringFill {
+  fill: none;
+  stroke-width: 10;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1s ease;
+}
+
+.accuracyText {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.1rem;
+}
+
+.accuracyNum {
+  font-family: var(--font-headline);
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  font-weight: 800;
+  line-height: 1;
+}
+
+.accuracyLabel {
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-on-surface-variant);
+}
+
+/* Stats grid */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.6rem;
+  width: 100%;
+}
+
+@media (max-width: 400px) {
+  .statsGrid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.statCard {
+  background: var(--color-surface-container-low);
+  border-radius: 0.75rem;
+  padding: 0.85rem 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.statIcon {
+  color: var(--color-on-surface-variant);
+  font-size: 1.2rem;
+}
+
+.statValue {
+  font-family: var(--font-headline);
+  font-size: clamp(1rem, 3vw, 1.3rem);
+  font-weight: 700;
+  color: var(--color-on-surface);
+}
+
+.statLabel {
+  font-size: 0.6rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-on-surface-variant);
+  text-align: center;
+}
+
+/* Recap */
+.recap {
+  font-size: 0.8rem;
+  color: var(--color-on-surface-variant);
+  text-align: center;
+}
+
+/* Actions */
+.actions {
+  display: flex;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.btnRetry, .btnHome {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.75rem 1rem;
+  border-radius: 9999px;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.15s, opacity 0.15s;
+}
+
+.btnRetry:hover, .btnHome:hover { transform: translateY(-1px); }
+.btnRetry:active, .btnHome:active { transform: scale(0.97); }
+
+.btnRetry {
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+.btnHome {
+  background: var(--color-surface-container-high);
+  color: var(--color-on-surface);
+}

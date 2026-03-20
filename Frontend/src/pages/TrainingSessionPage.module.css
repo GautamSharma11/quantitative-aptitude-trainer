@@ -1,0 +1,252 @@
+/* src/pages/TrainingSessionPage.module.css */
+
+.main {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: clamp(1rem, 3vw, 2rem) var(--page-px);
+  gap: clamp(1rem, 2.5vw, 1.75rem);
+}
+
+/* ── Stats bar ── */
+.statsBar {
+  width: 100%;
+  max-width: 660px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.statsGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--color-surface-container-low);
+  padding: 0.6rem 1rem;
+  border-radius: 0.75rem;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.statLabel {
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-on-surface-variant);
+}
+
+.statValue {
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  font-weight: 700;
+  color: var(--color-on-surface);
+  font-family: var(--font-headline);
+}
+
+.statValuePrimary { color: var(--color-primary); }
+.statValueError   { color: #a83836; }
+
+.statDivider {
+  width: 1px;
+  height: 2rem;
+  background: rgba(172, 179, 183, 0.25);
+  flex-shrink: 0;
+}
+
+.focusBadge {
+  display: none;
+  align-items: center;
+  gap: 0.3rem;
+  background: rgba(221, 225, 249, 0.5);
+  color: #4c5164;
+  padding: 0.4rem 0.9rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+@media (min-width: 480px) {
+  .focusBadge { display: flex; }
+}
+
+/* ── Question Card ── */
+.card {
+  width: 100%;
+  max-width: 660px;
+  background: var(--color-surface-lowest);
+  border-radius: 0.75rem;
+  box-shadow: 0 12px 32px -4px rgba(44, 52, 55, 0.06);
+  padding: clamp(1.5rem, 5vw, 3rem) clamp(1.5rem, 5vw, 3.5rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Progress bar sits at very top of card */
+.progressTrack {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--color-surface-container-high);
+  border-radius: 0;
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--color-primary);
+  border-radius: 0;
+  transition: width 0.4s ease;
+}
+
+/* ── Math display ── */
+.mathDisplay {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.25rem;
+  font-family: var(--font-headline);
+}
+
+.mathNum {
+  font-size: clamp(3rem, 10vw, 5.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--color-on-surface);
+  letter-spacing: -0.04em;
+}
+
+.mathRow {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.75rem, 3vw, 2rem);
+}
+
+.mathOp {
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  font-weight: 800;
+  color: var(--color-on-surface);
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+}
+
+.mathLine {
+  width: 100%;
+  height: clamp(3px, 0.5vw, 6px);
+  background: var(--color-on-surface);
+  border-radius: 9999px;
+  margin-top: 0.25rem;
+}
+
+/* ── Input ── */
+.inputWrap {
+  width: 100%;
+  max-width: 280px;
+  position: relative;
+}
+
+.input {
+  width: 100%;
+  text-align: center;
+  padding: clamp(0.75rem, 2vw, 1.25rem) 1rem;
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
+  font-weight: 700;
+  font-family: var(--font-headline);
+  background: var(--color-surface-container-high);
+  color: var(--color-on-surface);
+  border: 2px solid transparent;
+  border-radius: 0.75rem;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+  /* Remove number input arrows */
+  -moz-appearance: textfield;
+}
+
+.input::-webkit-outer-spin-button,
+.input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.input::placeholder {
+  color: rgba(172, 179, 183, 0.5);
+  font-size: clamp(1rem, 3vw, 1.5rem);
+  font-weight: 400;
+}
+
+.input:focus {
+  border-color: var(--color-primary);
+  background: var(--color-surface-lowest);
+  box-shadow: 0 0 0 3px rgba(0, 83, 220, 0.12);
+}
+
+/* Shake animation for wrong answer */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  15%       { transform: translateX(-8px); }
+  30%       { transform: translateX(8px); }
+  45%       { transform: translateX(-6px); }
+  60%       { transform: translateX(6px); }
+  75%       { transform: translateX(-3px); }
+  90%       { transform: translateX(3px); }
+}
+
+.shake .input {
+  animation: shake 0.45s ease;
+  border-color: #a83836;
+  box-shadow: 0 0 0 3px rgba(168, 56, 54, 0.15);
+}
+
+/* ── Progress text ── */
+.progressText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.progressLabel {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--color-outline-variant);
+}
+
+.progressCount {
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  font-weight: 600;
+  color: var(--color-on-surface-variant);
+}
+
+/* ── Keyboard hints ── */
+.hints {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.hint {
+  background: var(--color-surface-container-low);
+  color: var(--color-on-surface-variant);
+  padding: 0.4rem 0.9rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border: 1px solid rgba(172, 179, 183, 0.15);
+}

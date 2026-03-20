@@ -1,0 +1,32 @@
+/* src/components/MobileFAB.module.css */
+
+.fab {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  display: flex;
+}
+
+@media (min-width: 768px) {
+  .fab {
+    display: none;
+  }
+}
+
+.btn {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(0, 83, 220, 0.35);
+  transition: transform 0.2s;
+}
+
+.btn:hover  { transform: scale(1.05); }
+.btn:active { transform: scale(0.95); }
