@@ -12,8 +12,8 @@ public class WebConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/api/**")
                 .allowedOrigins(
-                    "http://localhost:5173",   // Vite dev server
-                    "http://localhost:4173"    // Vite preview
+                    "http://localhost:5173",
+                    "https://quantitative-aptitude-trainer.vercel.app"    // Vercel Front
                 )
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*");

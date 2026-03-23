@@ -1,6 +1,6 @@
 // src/services/additionApi.js
 
-const BASE_URL = "http://localhost:8080/api";
+const BASE_URL = "https://quantitative-aptitude-trainer.onrender.com/api";
 
 /**
  * POST /api/addition/generate
