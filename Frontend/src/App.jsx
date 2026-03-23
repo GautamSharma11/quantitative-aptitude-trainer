@@ -5,7 +5,7 @@ import TopAppBar            from "./components/TopAppBar";
 import Footer               from "./components/Footer";
 import MobileFAB            from "./components/MobileFAB";
 import ConfirmDialog        from "./components/ConfirmDialog";
-import TrainPage            from "./pages/Trainpage";
+import TrainPage            from "./pages/TrainPage";
 import StatsPage            from "./pages/StatsPage";
 import GoalsPage            from "./pages/GoalsPage";
 import ConfigureSessionPage from "./pages/ConfigureSessionPage";
