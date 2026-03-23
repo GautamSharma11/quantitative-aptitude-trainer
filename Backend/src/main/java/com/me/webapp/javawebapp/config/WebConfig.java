@@ -13,7 +13,7 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addMapping("/api/**")
                 .allowedOrigins(
                     "http://localhost:5173",
-                    "https://quantitative-aptitude-trainer.vercel.app"    // Vercel Front
+                    "quantitative-aptitude-trainer.vercel.app"    // Vercel Front
                 )
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*");
