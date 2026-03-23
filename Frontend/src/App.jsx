@@ -1,149 +1,140 @@
 // src/App.jsx
-import { useState } from "react";
-import TopAppBar             from "./components/TopAppBar";
-import Footer                from "./components/Footer";
-import MobileFAB             from "./components/MobileFAB";
-import ConfirmDialog         from "./components/ConfirmDialog";
-import TrainPage             from "./pages/TrainPage";
-import StatsPage             from "./pages/StatsPage";
-import GoalsPage             from "./pages/GoalsPage";
-import ConfigureSessionPage  from "./pages/ConfigureSessionPage";
-import TrainingSessionPage   from "./pages/TrainingSessionPage";
-import ResultsPage           from "./pages/ResultsPage";
+import { useState }                        from "react";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
+import TopAppBar            from "./components/TopAppBar";
+import Footer               from "./components/Footer";
+import MobileFAB            from "./components/MobileFAB";
+import ConfirmDialog        from "./components/ConfirmDialog";
+import TrainPage            from "./pages/Trainpage";
+import StatsPage            from "./pages/StatsPage";
+import GoalsPage            from "./pages/GoalsPage";
+import ConfigureSessionPage from "./pages/ConfigureSessionPage";
+import TrainingSessionPage  from "./pages/TrainingSessionPage";
+import ResultsPage          from "./pages/ResultsPage";
 import styles from "./App.module.css";
 
 export default function App() {
-  const [activePage,    setActivePage]    = useState("Train");
-  const [view,          setView]          = useState("home");  // home | configure | session | results
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Session state — passed between configure → session → results
   const [trainer,       setTrainer]       = useState(null);
   const [sessionData,   setSessionData]   = useState(null);
   const [sessionConfig, setSessionConfig] = useState(null);
   const [results,       setResults]       = useState(null);
 
-  // Pending navigation — stored while the confirm dialog is open
-  const [pendingNav,    setPendingNav]    = useState(null);  // { type: "page" | "home", page? }
+  // Confirmation dialog — only shown when navigating away mid-session
+  const [pendingNav,    setPendingNav]    = useState(null);
 
-  /* ─── Guard: only intercept when a session is actively running ─── */
-  function isSessionActive() {
-    return view === "session";
-  }
+  const isSessionActive = location.pathname === "/addition/session";
 
-  /* ─── TopAppBar nav clicks ─── */
+  /* ─── TopAppBar nav ─── */
   function handleNavigate(page) {
-    if (isSessionActive()) {
-      setPendingNav({ type: "page", page });
+    const path = page === "Train" ? "/" : `/${page.toLowerCase()}`;
+    if (isSessionActive) {
+      setPendingNav(path);
     } else {
-      commitNavigate(page);
+      navigate(path);
     }
   }
 
-  function commitNavigate(page) {
-    setActivePage(page);
-    setView("home");
-    setSessionData(null);
-    setResults(null);
-    setPendingNav(null);
-  }
-
-  /* ─── Trainer card click ─── */
+  /* ─── Trainer selected on home ─── */
   function handleSelectTrainer(t) {
     setTrainer(t);
-    setView("configure");
+    navigate("/addition");
   }
 
-  /* ─── Session lifecycle ─── */
+  /* ─── Session starts ─── */
   function handleSessionStart(data, config) {
     setSessionData(data);
     setSessionConfig(config);
-    setView("session");
+    navigate("/addition/session");
   }
 
+  /* ─── Session finishes ─── */
   function handleSessionFinish(res) {
     setResults(res);
-    setView("results");
+    navigate("/addition/results");
   }
 
   /* ─── Results actions ─── */
   function handleRetry() {
     setSessionData(null);
     setResults(null);
-    setView("configure");
+    navigate("/addition");
   }
 
   function handleHome() {
-    setView("home");
-    setActivePage("Train");
     setTrainer(null);
     setSessionData(null);
     setResults(null);
+    navigate("/");
   }
 
-  /* ─── Dialog callbacks ─── */
+  /* ─── Confirm dialog ─── */
   function handleConfirmLeave() {
-    if (!pendingNav) return;
-    if (pendingNav.type === "page") {
-      commitNavigate(pendingNav.page);
-    } else {
-      handleHome();
-      setPendingNav(null);
-    }
+    const dest = pendingNav;
+    setPendingNav(null);
+    navigate(dest);
   }
 
   function handleCancelLeave() {
     setPendingNav(null);
   }
 
-  /* ─── Render ─── */
-  function renderView() {
-    if (view === "configure") {
-      return (
-        <ConfigureSessionPage
-          trainer={trainer}
-          onStart={handleSessionStart}
-        />
-      );
-    }
-    if (view === "session" && sessionData) {
-      return (
-        <TrainingSessionPage
-          sessionData={sessionData}
-          config={sessionConfig}
-          onFinish={handleSessionFinish}
-        />
-      );
-    }
-    if (view === "results" && results) {
-      return (
-        <ResultsPage
-          results={results}
-          trainer={trainer}
-          config={sessionConfig}
-          onRetry={handleRetry}
-          onHome={handleHome}
-        />
-      );
-    }
-
-    switch (activePage) {
-      case "Stats":  return <StatsPage />;
-      case "Goals":  return <GoalsPage />;
-      default:       return <TrainPage onSelectTrainer={handleSelectTrainer} />;
-    }
+  /* ─── Active nav tab ─── */
+  function activeTab() {
+    if (location.pathname.startsWith("/stats"))  return "Stats";
+    if (location.pathname.startsWith("/goals"))  return "Goals";
+    return "Train";
   }
 
   return (
     <div className={styles.app}>
-      <TopAppBar activePage={activePage} onNavigate={handleNavigate} />
+      <TopAppBar activePage={activeTab()} onNavigate={handleNavigate} />
 
-      {renderView()}
+      <Routes>
+        <Route path="/" element={
+          <TrainPage onSelectTrainer={handleSelectTrainer} />
+        } />
+        <Route path="/stats"  element={<StatsPage />} />
+        <Route path="/goals"  element={<GoalsPage />} />
+        <Route path="/addition" element={
+          <ConfigureSessionPage
+            trainer={trainer}
+            onStart={handleSessionStart}
+          />
+        } />
+        <Route path="/addition/session" element={
+          sessionData
+            ? <TrainingSessionPage
+                sessionData={sessionData}
+                config={sessionConfig}
+                onFinish={handleSessionFinish}
+              />
+            : <RedirectHome />
+        } />
+        <Route path="/addition/results" element={
+          results
+            ? <ResultsPage
+                results={results}
+                trainer={trainer}
+                config={sessionConfig}
+                onRetry={handleRetry}
+                onHome={handleHome}
+              />
+            : <RedirectHome />
+        } />
+        {/* Catch-all */}
+        <Route path="*" element={<RedirectHome />} />
+      </Routes>
 
       <Footer />
 
-      {view === "home" && (
+      {location.pathname === "/" && (
         <MobileFAB onClick={() => handleSelectTrainer({ title: "Mixed", icon: "shuffle" })} />
       )}
 
-      {/* Confirmation dialog — only mounts when there's a pending navigation */}
       {pendingNav && (
         <ConfirmDialog
           title="Abandon session?"
@@ -156,4 +147,11 @@ export default function App() {
       )}
     </div>
   );
+}
+
+// Redirect to home if someone lands on /session or /results directly without state
+function RedirectHome() {
+  const navigate = useNavigate();
+  useState(() => { navigate("/"); });
+  return null;
 }
